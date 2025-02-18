@@ -10,7 +10,8 @@
 
 **Running**
    - To get recommendations, run
-   ```python recommendation.py
+   ```sh
+   python recommendation.py
    ```
    You will be prompted for user preferences.
    - If running preprocessing.py, download the data first and place in the same directory.
