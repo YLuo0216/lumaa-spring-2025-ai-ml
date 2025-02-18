@@ -1,91 +1,68 @@
 # AI/Machine Learning Intern Challenge: Simple Content-Based Recommendation
 
-**Deadline**: Sunday, Feb 23th 11:59 pm PST
+**Setup**
+   - I am using Python 3.12.9, though it should work with other versions as well.
+   - run these commands to setup (install dependencies and spaCy model):
+   ```sh
+   chmod +x setup.sh
+   ./setup.sh
+   ```
 
----
+**Running**
+   - To get recommendations, run
+   ```python recommendation.py
+   ```
+   You will be prompted for user preferences.
+   - If running preprocessing.py, download the data first and place in the same directory.
 
-## Overview
+**Dataset**
+   - Kaggle dataset: [Wikipedia Movie Plots](https://www.kaggle.com/datasets/jrobischon/wikipedia-movie-plots?resource=download)
+   - I chose to use the title, genre, and plot columns for my approach.
+   - Instances without genres were filtered out, and 500 instances were kept with a random seed.
 
-Build a **content-based recommendation system** that, given a **short text description** of a user’s preferences, suggests **similar items** (e.g., movies) from a small dataset. This challenge should take about **3 hours**, so keep your solution **simple** yet **functional**.
+**Modules**
+   - preprocessing.py
+      - Filters the dataset, tokenize and lemmatize movie description for recommendation.
+      - This script outputs the file preprocessed_500.csv, with 500 movie titles, genres, plots, and tokenized and lemmatized keywords.
+      - There is no need to rerun this file for generating recommendations.
+   - recommendation.py
+      - Takes user query and makes recommendations.
+      - This script uses the processed data csv, uses tfidf and cosine similarity to find the matching movies.
+      - The user query undergoes the same preprocessing to match best with the movie keywords.
 
-### Example Use Case
+**Example Output**
+```What are your preferences? I love thrilling action movies set in space, with a comedic twist.
+Here are your top movie recommendations:
 
-- The user inputs:  
-  *"I love thrilling action movies set in space, with a comedic twist."*  
-- Your system processes this description (query) and compares it to a dataset of items (e.g., movies with their plot summaries or keywords).  
-- You then return the **top 3–5 “closest” matches** to the user.
+Title: Henry Aldrich Gets Glamour
+Genre: comedy
+Plot: Henry Aldrich becomes the most sought after guy in town when he wins a date with a movie star.
+Similarity Score: 0.086
 
----
+Title: Tiger
+Genre: thriller drama
+Plot: The movie Tiger is a Kannada action packed thriller film led by the young star Pradeep (protagonist) who dreams to become a police officer which is against the wish of his father played by the well known actor and also a very famous Ex IAS officer K Shivram. Why is the father against the wish and the dream of his son is the crux of the story.
+Similarity Score: 0.071
 
-## Requirements
+Title: Listen... Amaya
+Genre: drama
+Plot: The film is set in Delhi, where a widowed mother, Leela, runs library cafe " Book a Coffee." Here she makes a new friend, a widowed photographer, Jayant 'Jazz', and soon finds their friendship growing. However, Leela's daughter Amaya, a budding writer, feels insecure about the relationship when she finds out about it. While she collaborates with Jazz on producing a coffee table book about the bazaars of Old Delhi, when her mother takes her relationship with Jazz further, she is unable to accept it. The journeys of all the principal characters and a subtle twist at the end make up the narrative of the film. ..
+Similarity Score: 0.063
 
-1. **Dataset**  
-   - Use a **small** public dataset of items (e.g., a list of movies with plot summaries, or other textual descriptions).  
-   - Make sure the dataset is easy to handle (maybe 100–500 rows) so the solution remains quick to implement and run.  
-   - Include the dataset in your forked repository *or* provide instructions/link on how to download it.  
+Title: Violent Cop
+Genre: action
+Plot: A cop teams up with a pimp to catch a killer who castrates his male victims.
+Similarity Score: 0.057
 
-2. **Approach**  
-   - **Content-Based**: At a minimum, use text similarity to recommend items.  
-     - For instance, you can transform both the user’s text input and each item’s description into TF-IDF vectors and compute **cosine similarity**.  
-   - Return the **top N** similar items (e.g., top 5).
+Title: Thikka
+Genre: action comedy
+Plot: The film is a confusion kidnap drama; Aditya (Sai Dharam Tej) is a booze-happy youngster who enjoys his day to day life until he meets a beautiful girl Anjali in an accident. He falls in love with her at first sight itself and also makes her fall in love with him too. After she entered to his life his entire lifestyle changes he leaves one by one all his bad habits, acquires a job in a corporate company and she also separates Aditya from his father Manohar (Rajendra Prasad) who is a big womanizer and drunker than him and also joins Manohar in a rehabilitation center.
+The twist in the story arises when complications erupt between the couple and they break up with each other for a small quarrel. Anjali is a daughter of a multimillionaire Madan Mohan (Anand) who fixes her marriage with another rich man’s son Jayanth (Vennela Kishore). Simultaneously in the office, Aditya conned by Kapoor (Ali) who wants to give promotion to his girlfriend Kavitha (Mumaith Khan), so he traps Aditya makes him cheat his childhood friend Stephen (Sathya) which makes the conflict between them.
+The frustrated Aditya call for a break up party along with his friends where so many characters enter into his life, Starting from his father Manohar escaping from rehabilitation center along with a girl Kamala (VJ Bani) his lover, who is a daughter of a late mafia don Devraj (Jakki), then a prostitute Padma come into the picture, suddenly two gangs of Sadhu Bhai (Ajay) and Narasimha (Raghu Babu) are after Aditya. A series of mad events follow - they fight with some guys, destroy a restaurant, a petrol bunk is burnt, etc. More on that Anjali elopes from marriage for Aditya and her father Madan Mohan’s men are also behind him and another beautiful girl Virisha (Mannara Chopra) tries to kill Aditya saying herself as his ex-lover. Rest of the story how Aditya comes out from this crazy situation.
+Similarity Score: 0.040```
 
-3. **Code Organization**  
-   - You may use a **Jupyter Notebook** or **Python scripts**.  
-   - Keep it **readable** and **modular** (e.g., one section for loading data, one for building vectors, one for computing similarity, etc.).  
-   - Briefly comment or docstring your key functions/sections.
+**Video Demo**
+[demo video](demo.mov)
 
-4. **Output**  
-   - When given an input description (e.g., `"I like action movies set in space"`), your system should print or return a list of recommended items (e.g., 3–5 titles).  
-   - Include the similarity score or rank if you’d like.
-
-5. **Summary & Instructions**  
-   - A short `README.md` that includes:
-     - **Dataset**: Where it’s from, any steps to load it.  
-     - **Setup**: Python version, virtual environment instructions, and how to install dependencies (`pip install -r requirements.txt`).  
-     - **Running**: How to run your code (e.g., `python recommend.py "Some user description"` or open your notebook in Jupyter).  
-     - **Results**: A brief example of your system’s output for a sample query.
-
----
-
-## Deliverables
-
-1. **Fork the Public Repository**  
-   - **Fork** this repo into your own GitHub account.
-
-2. **Implement Your Solution**  
-   - Load and preprocess your dataset (e.g., read CSV, handle text columns).  
-   - Convert text data to vectors (e.g., TF-IDF).  
-   - Implement a function to compute similarity between the user’s query and each item’s description.  
-   - Return the top matches.
-   - Salary expectation per month (Mandatory)
-
-3. **Short Video Demo**  
-   - In a `.md` file (e.g., `demo.md`) within your fork, paste a link to a **brief screen recording** (video link).  
-   - Demonstrate:
-     - How you run the recommendation code.  
-     - A sample query and the results.
-
-4. **Deadline**  
-   - Submit your fork by **Sunday, Feb 23th 11:59 pm PST**.
-
-> **Note**: This should be doable within ~3 hours. Keep it **straightforward**—you do **not** need advanced neural networks or complex pipelines. A simple TF-IDF + cosine similarity approach is sufficient.
-
----
-
-## Evaluation Criteria
-
-1. **Functionality**  
-   - Does your code run without errors?  
-   - When given an input query, does it successfully output relevant items?
-
-2. **Code Quality**  
-   - Clear, commented code (where it counts).  
-   - Logical steps (load data → transform → recommend).
-
-3. **Clarity**  
-   - Is your `README.md` straightforward about setup, how to run, and what to expect?
-
-4. **ML/Recommendation Understanding**  
-   - Basic implementation of a content-based recommendation approach (vectorization, similarity measure).
-
-**We look forward to seeing your solution!** Good luck!
+**Salary Expectation**
+I am looking for compensation around $25 per hour, which equates to around $2000 per month working 20 hours each week. Although, I value the experience and learning more than the compensation. I would love to know about the projects being worked on at Lumaa.
