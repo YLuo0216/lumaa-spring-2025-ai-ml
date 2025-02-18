@@ -64,7 +64,7 @@ Similarity Score: 0.040
 ```
 
 **Video Demo**
-[Link to Demo](https://youtu.be/6-3pKm-v39I)
+- [Link to Demo](https://youtu.be/6-3pKm-v39I)
 
 **Salary Expectation**
-I am looking for compensation around $25 per hour, which equates to around $2000 per month working 20 hours each week. Although, I value the experience and learning more than the compensation. I would love to know about the projects being worked on at Lumaa.
+- I am looking for compensation of around $25 per hour, which equates to around $2000 per month working 20 hours each week. Although, I value the experience and learning more than the compensation. I would love to know more about the projects being worked on at Lumaa.
